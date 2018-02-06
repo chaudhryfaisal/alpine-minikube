@@ -8,7 +8,7 @@ Pure alpine linux docker. Docker inside docker.
 
 ## System Requirements
 
-The ~700Mb image has an already created minkikube instance with 4Gb diskspace and 1Gb RAM.
+The ~800MB image has an already created minkikube instance with 4Gb diskspace and 1Gb RAM.
 This is only for experimentation and demo only.  Do not use in production.  The minikube binary from the official
 repository does not work in Alpine and had to be built from source.  (See Dockerfile)
 
@@ -17,6 +17,7 @@ repository does not work in Alpine and had to be built from source.  (See Docker
 Starts a shell ready to docker & minikube
 ```bash
 docker run -P -ti --privileged chaudhryfaisal/alpine-minikube bash
+# wait 15 seconds and run docker ps or run watch docker ps
 ```
 
 ## Minikube
@@ -26,7 +27,6 @@ After the commands below navigate to http://127.0.0.1:30000/#!/overview?namespac
 ```bash
 docker run -ti -p 30000 -p 31920 --rm --privileged chaudhryfaisal/alpine-minikube bash
 [Hit Enter] to get the shell prompt
-minikube start
 kubectl run webserver --image=nginx:alpine
 kubectl expose deployment webserver --type=LoadBalancer --port=80
 ```
@@ -34,7 +34,7 @@ kubectl expose deployment webserver --type=LoadBalancer --port=80
 ## Daemon
 
 ```bash
-docker run --name minikube -p 2375:2375 --privileged -d chaudhryfaisal/alpine-minikube
+docker run --name minikube -p 31920:31920 -p 2375:2375 --privileged -d chaudhryfaisal/alpine-minikube
 ```
 
 To start a shell in your new container.

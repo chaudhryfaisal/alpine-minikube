@@ -7,11 +7,12 @@ fi
 
 # Add docker daemon as command if needed
 if [[ "$1" != 'dockerd-cmd.sh' ]]; then
-	echo "Starting Docker Daemon"
+	echo "Starting Docker Daemon from dockerd-entrypoint.sh"
 	dockerd \
 			--host=unix:///var/run/docker.sock \
 			--host=tcp://0.0.0.0:2375  \
 			--storage-driver=vfs &
+	sleep 3;minikube start
 fi
 
 # set docker settings
