@@ -16,15 +16,15 @@ repository does not work in Alpine and had to be built from source.  (See Docker
 
 Starts a shell ready to docker & minikube
 ```bash
-docker run -ti --privileged whindes/alpine-minikube sh
+docker run -P -ti --privileged chaudhryfaisal/alpine-minikube bash
 ```
 
 ## Minikube
 
-After the commands below navigate to http://<your_host_docker>:30000/#!/overview?namespace=default
+After the commands below navigate to http://127.0.0.1:30000/#!/overview?namespace=default
 
 ```bash
-docker run -ti -p 30000 -p 31920 --rm --privileged whindes/alpine-minikube sh
+docker run -ti -p 30000 -p 31920 --rm --privileged chaudhryfaisal/alpine-minikube bash
 [Hit Enter] to get the shell prompt
 minikube start
 kubectl run webserver --image=nginx:alpine
@@ -34,13 +34,13 @@ kubectl expose deployment webserver --type=LoadBalancer --port=80
 ## Daemon
 
 ```bash
-docker run --name alpine-docker -p 2375:2375 --privileged -d whindes/alpine-minikube
+docker run --name minikube -p 2375:2375 --privileged -d chaudhryfaisal/alpine-minikube
 ```
 
 To start a shell in your new container.
 
 ```bash
-docker exec -ti alpine-docker /bin/sh
+docker exec -ti minikube /bin/bash
 ```
 
 ## Inside the container shell
@@ -56,7 +56,7 @@ docker volume ls
 
 ## Docker-compose
 
-If you need docker-compose inside your alpine-docker container.
+If you need docker-compose inside your minikube container.
 ```bash
 setup-compose
 docker-compose up
